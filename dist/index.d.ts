@@ -1,3 +1,4 @@
+import { FieldValues, UseFormProps, UseFormReturn } from 'react-hook-form';
 import * as react_jsx_runtime from 'react/jsx-runtime';
 import * as React$1 from 'react';
 
@@ -8,6 +9,78 @@ interface SubmitResponse$1 {
     error?: string;
     signupUrl?: string;
 }
+declare function submitForm(data: Record<string, any>, apiKey?: string): Promise<SubmitResponse$1>;
+
+/**
+ * Options for configuring useFormFlow hook
+ */
+interface UseFormFlowOptions<TFieldValues extends FieldValues = FieldValues> extends UseFormProps<TFieldValues> {
+    /**
+     * FormFlow API key from https://formflow.sh/api-keys
+     * @example "pk_live_abc123"
+     */
+    apiKey?: string;
+    /**
+     * Called when form submits successfully
+     * @param data - The submitted form data
+     * @param response - The FormFlow API response
+     */
+    onSuccess?: (data: TFieldValues, response: SubmitResponse$1) => void;
+    /**
+     * Called when form submission fails
+     * @param error - Error object with details
+     */
+    onError?: (error: Error | SubmitResponse$1) => void;
+}
+/**
+ * Return value from useFormFlow hook
+ * Includes all react-hook-form methods plus handleSubmit configured for FormFlow
+ */
+type UseFormFlowReturn<TFieldValues extends FieldValues = FieldValues> = Omit<UseFormReturn<TFieldValues>, 'handleSubmit'> & {
+    /**
+     * Form submission handler that submits to FormFlow backend
+     * Works like react-hook-form's handleSubmit but automatically submits to FormFlow
+     * @example
+     * ```tsx
+     * <form onSubmit={handleSubmit}>...</form>
+     * ```
+     */
+    handleSubmit: ReturnType<UseFormReturn<TFieldValues>['handleSubmit']>;
+};
+/**
+ * React hook for building forms that submit to FormFlow backend.
+ * Works with any UI library (shadcn/ui, MUI, native HTML).
+ *
+ * Wraps react-hook-form for validation and state management, adding
+ * automatic backend submission to FormFlow API.
+ *
+ * @example
+ * ```tsx
+ * import { useFormFlow } from '@formflow.sh/react';
+ * import { Input } from '@/components/ui/input';
+ * import { Button } from '@/components/ui/button';
+ *
+ * function ContactForm() {
+ *   const { register, handleSubmit, formState } = useFormFlow({
+ *     apiKey: process.env.NEXT_PUBLIC_FORMFLOW_API_KEY,
+ *     onSuccess: () => alert('Thanks!'),
+ *   });
+ *
+ *   return (
+ *     <form onSubmit={handleSubmit}>
+ *       <Input {...register('email')} type="email" required />
+ *       <Button type="submit" disabled={formState.isSubmitting}>
+ *         Submit
+ *       </Button>
+ *     </form>
+ *   );
+ * }
+ * ```
+ *
+ * @param options - Configuration for the form
+ * @returns Form state and handlers from react-hook-form with handleSubmit configured for FormFlow
+ */
+declare function useFormFlow<TFieldValues extends FieldValues = FieldValues>(options: UseFormFlowOptions<TFieldValues>): UseFormFlowReturn<TFieldValues>;
 
 type Theme = 'minimal' | 'modern' | 'brutalist' | 'glass';
 interface SubmitResponse {
@@ -413,4 +486,4 @@ interface QuoteRequestFormData {
  */
 declare function QuoteRequestForm({ apiKey, theme, className, services, budgetRanges, submitText, onSuccess, onError, title, description, }: QuoteRequestFormProps): react_jsx_runtime.JSX.Element;
 
-export { BookingForm, Checkbox, ContactForm, FeedbackForm, FormFlow, type FormFlowProps$1 as FormFlowProps, Input, type InputProps$1 as InputProps, NewsletterForm, QuoteRequestForm, Select, type SelectProps$1 as SelectProps, SubmitButton, type SubmitResponse, SupportTicketForm, type TemplateProps, Textarea, type TextareaProps$1 as TextareaProps, type Theme };
+export { BookingForm, Checkbox, ContactForm, FeedbackForm, FormFlow, type FormFlowProps$1 as FormFlowProps, Input, type InputProps$1 as InputProps, NewsletterForm, QuoteRequestForm, Select, type SelectProps$1 as SelectProps, SubmitButton, type SubmitResponse$1 as SubmitResponse, SupportTicketForm, type TemplateProps, Textarea, type TextareaProps$1 as TextareaProps, type Theme, type UseFormFlowOptions, type UseFormFlowReturn, submitForm, useFormFlow };

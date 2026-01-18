@@ -1,7 +1,7 @@
 {
   "name": "@formflow.sh/react",
   "version": "0.1.1",
-  "description": "Beautiful React forms with backend included - designed for AI agents",
+  "description": "React form hook with built-in backend submission. No server code needed. Works with shadcn/ui, MUI, and any component library. Built on react-hook-form.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -20,25 +20,43 @@
   "keywords": [
     "react",
     "forms",
-    "form-builder",
-    "typescript",
-    "ai-agent",
-    "shadcn-ui",
-    "composable",
+    "form",
+    "validation",
     "backend",
-    "mailchimp",
-    "newsletter"
+    "submission",
+    "api",
+    "hooks",
+    "react-hook-form",
+    "formik",
+    "contact-form",
+    "newsletter",
+    "form-handling",
+    "serverless",
+    "shadcn-ui",
+    "material-ui",
+    "chakra-ui",
+    "form-submission",
+    "form-api",
+    "no-backend",
+    "typescript"
   ],
   "author": "FormFlow",
   "license": "MIT",
+  "homepage": "https://formflow.sh",
   "repository": {
     "type": "git",
     "url": "https://github.com/formflow-labs/react"
   },
+  "bugs": {
+    "url": "https://github.com/formflow-labs/react/issues"
+  },
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage"
   },
   "peerDependencies": {
     "react": "^18.0.0",
@@ -52,16 +70,26 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "lucide-react": "^0.309.0",
+    "react-hook-form": "^7.49.2",
     "tailwind-merge": "^2.2.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/react-hooks": "^8.0.1",
+    "@testing-library/user-event": "^14.5.1",
     "@types/node": "^20.11.0",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/ui": "^1.1.0",
     "autoprefixer": "^10.4.16",
+    "jsdom": "^23.0.1",
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
     "tsup": "^8.0.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "undici": "^7.18.2",
+    "vitest": "^1.1.0"
   }
 }
