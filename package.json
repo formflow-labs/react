@@ -1,6 +1,6 @@
 {
   "name": "@formflow.sh/react",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "React form hook with built-in backend submission. No server code needed. Works with shadcn/ui, MUI, and any component library. Built on react-hook-form.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
